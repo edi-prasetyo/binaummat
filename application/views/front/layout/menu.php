@@ -13,9 +13,9 @@ $meta           = $this->meta_model->get_meta();
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active"><a class="nav-link" href="<?php echo base_url() ?>"><i class="ti ti-home"></i> Home <span class="sr-only">(current)</span></a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo base_url('about') ?>">Tentang Kami</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="<?php echo base_url('about') ?>">Tentang Kami</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?php echo base_url('products') ?>">Produk</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo base_url('contact') ?>">Hubungi Kami</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo base_url('contact') ?>">Hubungi Kami</a></li> -->
 
             </ul>
             <ul class="navbar-nav">

@@ -11,7 +11,7 @@ $meta      = $this->meta_model->get_meta();
 <section class="bantuan py-md-3 mt-md-5">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 text-light"><span style="font-size:35px;font-weight:700;">Butuh Bantuan ? Hubungi Kami</span></div>
+            <div class="col-md-8 text-light"><span style="font-size:35px;font-weight:700;">Ingin Donasi ? Hubungi Kami</span></div>
             <div class="col-md-4 text-light"><span style="font-size:30px;font-weight:700;"><i class="fas fa-phone"></i> <?php echo $meta->telepon; ?></span></div>
         </div>
     </div>
@@ -27,22 +27,26 @@ $meta      = $this->meta_model->get_meta();
                 </span>
             </div>
             <div class="col-6 col-md ml-md-5">
-                <h5>Produk Utama</h5>
+                <h5>Asrama</h5>
                 <ul class="list-unstyled text-small">
 
-                    <li><a class="text-muted" href="#sec1">Foshand</a></li>
-                    <li><a class="text-muted" href="#sec2">Alcohol 70%</a></li>
-                    <li><a class="text-muted" href="#sec3">fosdes 1420</a></li>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="<?php echo base_url() ?>">Pondok Aren</a></li>
+                        <li><a class="text-muted" href="<?php echo base_url() ?>">Bintaro</a></li>
+                        <li><a class="text-muted" href="<?php echo base_url() ?>">BSD</a></li>
+                        <li><a class="text-muted" href="<?php echo base_url() ?>">Mencong</a></li>
+                        <li><a class="text-muted" href="<?php echo base_url() ?>">Depok</a></li>
+                    </ul>
 
                 </ul>
             </div>
             <div class="col-5 col-md">
                 <h5>Halaman</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="<?php echo base_url('about') ?>">About Us</a></li>
-                    <li><a class="text-muted" href="<?php echo base_url('contact') ?>">Contact Us</a></li>
-                    <li><a class="text-muted" href="<?php echo base_url('products') ?>">Produk</a></li>
-                    <li><a class="text-muted" href="<?php echo base_url('berita') ?>">Berita</a></li>
+                    <li><a class="text-muted" href="<?php echo base_url() ?>">About Us</a></li>
+                    <li><a class="text-muted" href="<?php echo base_url() ?>">Contact Us</a></li>
+                    <li><a class="text-muted" href="<?php echo base_url() ?>">Produk</a></li>
+                    <li><a class="text-muted" href="<?php echo base_url() ?>">Berita</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md">
