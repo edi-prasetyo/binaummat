@@ -1,6 +1,6 @@
-<div class="breadcrumb-default">
+<div class="breadcrumb">
     <div class="container">
-        <ul class="breadcrumb">
+        <ul class="breadcrumb my-3">
             <li class="breadcrumb-item"><a href="<?php echo base_url('') ?>"><i class="ti ti-home"></i> Home</a></li>
             <li class="breadcrumb-item"><a href="<?php echo base_url('berita') ?>"> Berita</a></li>
 
@@ -8,25 +8,29 @@
         </ul>
     </div>
 </div>
-<div class="container">
-    <div class="margin-top row">
-        <div class="col-md-8">
-            <div class="card">
+<div class="container mb-3">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card mb-3">
                 <div class="card-body">
-                    <img class="img-fluid" src="<?php echo base_url('assets/img/artikel/' . $berita->berita_gambar); ?>">
                     <h2><?php echo $berita->berita_title; ?></h2>
-                    <?php echo $berita->berita_desc; ?>
-                    <?php echo $berita->berita_views; ?>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
+                <img class="img-fluid" src="<?php echo base_url('assets/img/artikel/' . $berita->berita_gambar); ?>">
                 <div class="card-body">
-
-                    Sidebar
+                    <?php echo $berita->berita_desc; ?>
+                </div>
+                <div class="card-footer bg-white d-flex justify-content-between align-items-center">
+                    <span><i class="bi-person"></i> <?php echo $berita->user_name; ?></span>
+                    <span><i class="bi-eye"></i> <?php echo $berita->berita_views; ?></span>
+                    <span><i class="bi-calendar"></i><?php echo date('d/m/Y', strtotime($berita->date_created)); ?>
                 </div>
             </div>
         </div>
+
+        <div class="col-md-3">
+            <?php include "sidebar.php"; ?>
+        </div>
+
     </div>
 </div>
+

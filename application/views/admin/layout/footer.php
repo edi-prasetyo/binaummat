@@ -1,58 +1,88 @@
 </div>
-<!---Container Fluid-->
-</div>
-<!-- Footer -->
-<footer class="sticky-footer bg-white mt-3">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Application Version 1.0
-            </span>
-        </div>
-    </div>
-</footer>
-<!-- Footer -->
 </div>
 </div>
+<!-- /#wrapper -->
 
-<!-- Scroll to top -->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+<!-- Bootstrap core JavaScript -->
+<script src="<?php echo base_url('assets/template/admin/vendor/jquery/jquery.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/template/admin/vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="<?php echo base_url('assets/template/admin/vendor/autocomplete/jquery-ui.js'); ?>"></script>
 
-<script src="<?php echo base_url('assets/admin/vendor/jquery/jquery.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/admin/vendor/jquery-easing/jquery.easing.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/admin/js/myscript.min.js') ?>"></script>
-<!-- <script src="<?php echo base_url('assets/admin/js/Chart.js-2.9.3/dist/chart.min.js'); ?>"></script> -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(function() {
+            $("#startDate").datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+            $("#endDate").datepicker({
+                dateFormat: 'yy-mm-dd'
+            }).bind("change", function() {
+                var minValue = $(this).val();
+                minValue = $.datepicker.parseDate("yy-mm-dd", minValue);
+                minValue.setDate(minValue.getDate() + 1);
+                $("#to").datepicker("option", "minDate", minValue);
+            });
+            $("#sisawaktu").datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+        });
+    });
+</script>
 
 
-
-<script src="<?php echo base_url('assets/template/js/chosen.jquery.min.js'); ?>"></script>
-
-<!-- AUTOCOMPLETE -->
-<script src="<?php echo base_url('assets/admin/js/autocomplete/jquery-3.3.1.js'); ?>"></script>
-<script src="<?php echo base_url('assets/admin/js/autocomplete/jquery-ui.js'); ?>"></script>
 <script type="text/javascript">
     $(document).ready(function() {
 
-        $('#donatur_name').autocomplete({
-            source: "<?php echo base_url('admin/home/get_autocomplete'); ?>",
+        $('#company').autocomplete({
+            source: "<?php echo base_url('admin/customer/get_autocomplete'); ?>",
 
             select: function(event, ui) {
-                $('[name="donatur_name"]').val(ui.item.label);
-                $('[name="donatur_phone"]').val(ui.item.donatur_phone);
+                $('[name="company"]').val(ui.item.label);
+                $('[name="phone"]').val(ui.item.phone);
+                $('[name="address"]').val(ui.item.address);
+                $('[name="fullname"]').val(ui.item.fullname);
+                $('[name="customer_id"]').val(ui.item.id);
+                $('[name="email"]').val(ui.item.email);
+                $('[name="whatsapp"]').val(ui.item.whatsapp);
+                $('[name="city_name"]').val(ui.item.city_name);
+                $('[name="province_name"]').val(ui.item.province_name);
+                $('[name="postal_code"]').val(ui.item.postal_code);
             }
         });
 
     });
 </script>
 
-<!-- SUMMERNOTE -->
-<link href="<?php echo base_url('assets/admin/js/summernote/summernote-lite.min.css'); ?>" rel="stylesheet">
-<script src="<?php echo base_url('assets/admin/js/summernote/summernote-lite.min.js'); ?>"></script>
+
+
+
+<!--Menu Toggle Script-->
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+
+<!--SUMMERNOTE-->
+<link href="<?php echo base_url('assets/template/admin/vendor/summernote/summernote-lite.min.css'); ?> " rel="stylesheet">
+<script src="<?php echo base_url('assets/template/admin/vendor/summernote/summernote-lite.min.js'); ?>"></script>
 <script>
     $('#summernote').summernote({
-        placeholder: 'Keterangan ..',
+        tabsize: 2,
+        height: 130,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+    $('#summernote2').summernote({
         tabsize: 2,
         height: 130,
         toolbar: [
@@ -68,61 +98,26 @@
 </script>
 
 
-<script src="<?php echo base_url('assets/admin/vendor/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js'); ?>"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#datepicker').datepicker({
-            format: 'yyyy-mm-dd',
-            todayHighlight: true,
-            autoclose: true,
-            // dateFormat: 'Y-m-d'
-        });
-        $('#start_date').datepicker({
-            format: 'yyyy-mm-dd',
-            todayHighlight: true,
-            autoclose: true,
-            // dateFormat: 'Y-m-d'
-        });
-        $('#end_date').datepicker({
-            format: 'yyyy-mm-dd',
-            todayHighlight: true,
-            autoclose: true,
-            // dateFormat: 'Y-m-d'
-        });
-    });
-</script>
-<!-- Image Upload preview -->
 <script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                $('#blah').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]); // convert to base64 string
-        }
-    }
-
-    $("#customFile").change(function() {
-        readURL(this);
-    });
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>
-
-<!-- PriNt Area -->
-<script type="text/javascript">
-    function printDiv(printableArea) {
-        var printContents = document.getElementById(printableArea).innerHTML;
-        var originalContents = document.body.innerHTML;
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
-    }
-</script>
-
-
-
 
 
 </body>

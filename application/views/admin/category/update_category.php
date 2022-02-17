@@ -1,9 +1,5 @@
-<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Edit<?php echo $category->id; ?>">
-    <i class="fa fa-edit"></i> Edit
-</button>
-
-<div class="modal modal-default fade" id="Edit<?php echo $category->id ?>">
-    <div class="modal-dialog">
+<div class="col-md-7">
+    <div class="card">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Tambah Kategori</h4>
@@ -16,27 +12,35 @@
                 //Error warning
                 echo validation_errors('<div class="alert alert-warning">', '</div>');
 
-                echo form_open(base_url('admin/category/update/' . $category->id));
+                echo form_open_multipart(base_url('admin/category/update/' . $category->id));
 
                 ?>
 
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label>Nama Kategori</label>
                     <input type="text" class="form-control" name="category_name" value="<?php echo $category->category_name ?>">
                 </div>
 
-                <div class="form-group">
-                    <label>Tipe</label>
-                    <select name="category_type" class="form-control form-control-chosen">
-                        <option value="Berita" <?php if ($category->category_type == "Berita") {
-                                                    echo "selected";
-                                                } ?>>Berita</option>
-                        <option value="Donasi" <?php if ($category->category_type == "Donasi") {
-                                                    echo "selected";
-                                                } ?>>Donasi</option>
-                        <option value="Pengeluaran">Pengeluaran</option>
-                    </select>
+                <div class="form-group mb-3">
+                    <label>Deskripsi Kategori</label>
+                    <textarea class="form-control" name="category_desc" placeholder="Deskripsi Kategori"><?php echo $category->category_desc; ?></textarea>
+                    <?php echo form_error('category_name', '<small class="text-danger">', '</small>'); ?>
                 </div>
+
+                <div class="form-group mb-3">
+                    <label class="col-lg-3 col-form-label">Ubah icon <span class="text-danger">*</span>
+                    </label>
+                    <?php if ($category->category_image == null) : ?>
+                    <?php else : ?>
+                        <img class="img-fluid" src="<?php echo base_url('assets/img/category/' . $category->category_image); ?>">
+                    <?php endif; ?>
+                    <div class="col-lg-6">
+                        <div class="input-group mb-3">
+                            <input type="file" name="category_image">
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" name="submit" value="Simpan Data">
@@ -57,6 +61,4 @@
         </div>
         <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->

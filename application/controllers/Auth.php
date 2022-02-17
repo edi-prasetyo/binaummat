@@ -3,14 +3,24 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
+	/**
+	 * Development By Edi Prasetyo
+	 * edikomputer@gmail.com
+	 * 0812 3333 5523
+	 * https://edikomputer.com
+	 * https://grahastudio.com
+	 */
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
+		$this->load->model('pengaturan_model');
 	}
-
 	public function index()
 	{
+		if ($this->session->userdata('id')) {
+			redirect('myaccount');
+		}
 		$this->form_validation->set_rules(
 			'email',
 			'Email',
@@ -29,13 +39,26 @@ class Auth extends CI_Controller
 			]
 		);
 		if ($this->form_validation->run() == false) {
-			$data = [
-				'title' 		=> 'User Login',
-				'content'       => 'front/auth/login'
-			];
-			$this->load->view('front/layout/wrapp', $data, FALSE);
+			if (!$this->agent->is_mobile()) {
+				// Desktop View
+				$data = [
+					'title' 		=> 'User Login',
+					'deskripsi'		=> 'deskripsi',
+					'keywords'		=> 'keywords',
+					'content'       => 'front/auth/login'
+				];
+				$this->load->view('front/layout/wrapp', $data, FALSE);
+			} else {
+				// Mobile View
+				$data = [
+					'title' 		=> 'User Login',
+					'deskripsi'		=> 'deskripsi',
+					'keywords'		=> 'keywords',
+					'content'       => 'mobile/auth/login'
+				];
+				$this->load->view('mobile/layout/wrapp', $data, FALSE);
+			}
 		} else {
-			//Validasi Berhasil
 			$this->_login();
 		}
 	}
@@ -46,12 +69,11 @@ class Auth extends CI_Controller
 
 		$user = $this->db->get_where('user', ['email' => $email])->row_array();
 		if ($user) {
-			//User Ada
-			//Jika User Aktif
+
 			if ($user['is_active'] == 1) {
-				//Cek Password
+
 				if (password_verify($password, $user['password'])) {
-					//Password Berhasil
+
 					$data  = [
 						'email'		=> $user['email'],
 						'role_id'	=> $user['role_id'],
@@ -61,27 +83,28 @@ class Auth extends CI_Controller
 					if ($user['role_id'] == 1) {
 						redirect('admin/dashboard');
 					} else {
-						redirect('admin/home');
+						redirect('myaccount');
 					}
 				} else {
-					//Password Salah
 					$this->session->set_flashdata('message', '<div class="alert alert-danger">Password Salah</div> ');
 					redirect('auth');
 				}
 			} else {
-				//User tidak Aktif
 				$this->session->set_flashdata('message', '<div class="alert alert-danger">Email Belum di Aktivasi, Silahkan Cek email anda</div> ');
 				redirect('auth');
 			}
 		} else {
-			//User tidak ada
 			$this->session->set_flashdata('message', '<div class="alert alert-danger">Email Tidak Terdaftar</div> ');
 			redirect('auth');
 		}
 	}
-
 	public function register()
 	{
+		$send_email_register = $this->pengaturan_model->sendemail_status_register();
+		if ($this->session->userdata('id')) {
+			redirect('myaccount');
+		}
+
 		$this->form_validation->set_rules(
 			'user_name',
 			'Nama',
@@ -110,11 +133,25 @@ class Auth extends CI_Controller
 		$this->form_validation->set_rules('password2', 'Ulangi Password', 'required|trim|matches[password1]');
 
 		if ($this->form_validation->run() == false) {
-			$data = [
-				'title'			=> 'Register Donatur',
-				'content'       => 'front/auth/register'
-			];
-			$this->load->view('front/layout/wrapp', $data, FALSE);
+			if (!$this->agent->is_mobile()) {
+				// Desktop View
+				$data = [
+					'title'			=> 'Register',
+					'deskripsi'		=> 'Deskripsi',
+					'keywords'		=> 'Keywords',
+					'content'       => 'front/auth/register'
+				];
+				$this->load->view('front/layout/wrapp', $data, FALSE);
+			} else {
+				// Mobile View
+				$data = [
+					'title'			=> 'Register',
+					'deskripsi'		=> 'Deskripsi',
+					'keywords'		=> 'Keywords',
+					'content'       => 'mobile/auth/register'
+				];
+				$this->load->view('mobile/layout/wrapp', $data, FALSE);
+			}
 		} else {
 			$email = $this->input->post('email', true);
 			$data = [
@@ -122,13 +159,11 @@ class Auth extends CI_Controller
 				'user_name' 	=> htmlspecialchars($this->input->post('user_name', true)),
 				'email' 		=> htmlspecialchars($email),
 				'user_image' 	=> 'default.jpg',
-				'user_phone'	=> $this->input->post('user_phone'),
 				'password'		=> password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-				'role_id'		=> 2,
+				'role_id'		=> 3,
 				'is_active'		=> 0,
 				'date_created'	=> time()
 			];
-			//Token
 			$token = base64_encode(random_bytes(25));
 			$user_token = [
 				'email'			=> $email,
@@ -137,52 +172,35 @@ class Auth extends CI_Controller
 			];
 			$this->db->insert('user', $data);
 			$this->db->insert('user_token', $user_token);
-			//Kirim Email
-			$this->_sendEmail($token, 'verify');
 
-			$this->session->set_flashdata('message', '<div class="alert alert-success">Selamat Anda berhasil mendaftar, silahkan Aktivasi akun</div> ');
-			redirect('auth');
+			if ($send_email_register->status == 1) {
+				$this->_sendEmail($token, 'verify');
+				$this->session->set_flashdata('message', '<div class="alert alert-success">Selamat Anda berhasil mendaftar, silahkan Aktivasi akun</div> ');
+				redirect('auth');
+			} else {
+				$this->session->set_flashdata('message', '<div class="alert alert-success">Selamat Anda berhasil mendaftar, silahkan Login</div> ');
+				redirect('auth');
+			}
 		}
 	}
 	private function _sendEmail($token, $type)
 	{
+		$email_register = $this->pengaturan_model->email_register();
 		$config = [
-
-			'protocol' 		=> 'smtp',
-			'smtp_host' 	=> 'ssl://mail.eliterentcar.co.id',
-			'smtp_port' 	=> 465,
-			'smtp_user' 	=> 'carbook@eliterentcar.co.id',
-			'smtp_pass' 	=> '0123456789/*',
+			'protocol'     	=> "$email_register->protocol",
+			'smtp_host'   	=> "$email_register->smtp_host",
+			'smtp_port'   	=> $email_register->smtp_port,
+			'smtp_user'   	=> "$email_register->smtp_user",
+			'smtp_pass'   	=> "$email_register->smtp_pass",
 			'mailtype' 		=> 'html',
 			'charset' 		=> 'utf-8',
-
-			// 'protocol' 		=> 'smtp',
-			// 'smtp_host' 	=> 'ssl://smtp.googlemail.com',
-			// 'smtp_port' 	=> 465,
-			// 'smtp_user' 	=> 'aktivasigrahastudio@gmail.com',
-			// 'smtp_pass' 	=> '0123456789/*',
-			// 'mailtype' 		=> 'html',
-			// 'charset' 		=> 'utf-8',
-
-			// 'protocol'  => 'smtp',
-			// 'smtp_host' => 'ssl://smtp.googlemail.com',
-			// 'smtp_port' => 465,
-			// 'smtp_user' => 'design.atrans@gmail.com', // change it to yours
-			// 'smtp_pass' => 'atrans88', // change it to yours
-			// 'mailtype'  => 'html',
-			// 'charset'   => 'iso-8859-1',
-			// 'wordwrap'  => TRUE
-
 		];
 
 		$this->load->library('email', $config);
 		$this->email->initialize($config);
-
 		$this->email->set_newline("\r\n");
-
-		$this->email->from('carbook@eliterentcar.co.id', 'Testing');
+		$this->email->from("$email_register->smtp_user", 'System');
 		$this->email->to($this->input->post('email'));
-
 		if ($type == 'verify') {
 			$this->email->subject('Account Verification');
 			$this->email->message('Silahkan Klik Link ini untuk mengaktivasi akun 
@@ -192,13 +210,8 @@ class Auth extends CI_Controller
 			$this->email->message('Silahkan Klik Link ini untuk Mereset Password 
 			<a href=" ' . base_url() . 'auth/resetpassword?email=' . $this->input->post('email') . '&token=' . urlencode($token) . ' ">Reset Password</a>');
 		}
-
-
 		if ($this->email->send()) {
 			return true;
-		} else {
-			echo $this->email->print_debugger();
-			die;
 		}
 	}
 	public function verify()
@@ -247,11 +260,25 @@ class Auth extends CI_Controller
 			]
 		);
 		if ($this->form_validation->run() == false) {
-			$data = [
-				'title'		=> 'Forgot Password',
-				'content'	=> 'front/auth/forgot_password'
-			];
-			$this->load->view('front/layout/wrapp', $data, FALSE);
+			if (!$this->agent->is_mobile()) {
+				// Desktop View
+				$data = [
+					'title'		=> 'Forgot Password',
+					'deskripsi'		=> 'Deskripsi',
+					'keywords'		=> 'Keywords',
+					'content'	=> 'front/auth/forgot_password'
+				];
+				$this->load->view('front/layout/wrapp', $data, FALSE);
+			} else {
+				// Mobile View
+				$data = [
+					'title'		=> 'Forgot Password',
+					'deskripsi'		=> 'Deskripsi',
+					'keywords'		=> 'Keywords',
+					'content'	=> 'mobile/auth/forgot_password'
+				];
+				$this->load->view('mobile/layout/wrapp', $data, FALSE);
+			}
 		} else {
 			$email = $this->input->post('email');
 			$user = $this->db->get_where('user', ['email' => $email, 'is_active' => 1])->row_array();
@@ -311,11 +338,25 @@ class Auth extends CI_Controller
 		);
 
 		if ($this->form_validation->run() == false) {
-			$data = [
-				'title'		=> 'Change Password',
-				'content'	=> 'front/auth/change_password'
-			];
-			$this->load->view('front/layout/wrapp', $data, FALSE);
+			if (!$this->agent->is_mobile()) {
+				// Desktop View
+				$data = [
+					'title'		=> 'Change Password',
+					'deskripsi'		=> 'Deskripsi',
+					'keywords'		=> 'Keywords',
+					'content'	=> 'front/auth/change_password'
+				];
+				$this->load->view('front/layout/wrapp', $data, FALSE);
+			} else {
+				// Mobile View
+				$data = [
+					'title'		=> 'Change Password',
+					'deskripsi'		=> 'Deskripsi',
+					'keywords'		=> 'Keywords',
+					'content'	=> 'mobile/auth/change_password'
+				];
+				$this->load->view('mobile/layout/wrapp', $data, FALSE);
+			}
 		} else {
 			$password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
 			$email = $this->session->userdata('reset_email');
@@ -332,8 +373,8 @@ class Auth extends CI_Controller
 	public function logout()
 	{
 		$this->session->unset_userdata('email');
-		$this->session->unset_userdata('id');
 		$this->session->unset_userdata('role_id');
+		$this->session->unset_userdata('id');
 		$this->session->set_flashdata('message', '<div class="alert alert-success">Anda sudah Logout</div> ');
 		redirect('auth');
 	}

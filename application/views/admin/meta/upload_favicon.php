@@ -1,5 +1,5 @@
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
+<div class="card">
+    <div class="card-header">
         <?php echo $title; ?>
     </div>
     <div class="card-body">
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary btn-lg" value="Upload Favicon">
+                    <input type="submit" class="btn btn-primary" value="Upload Favicon">
                 </div>
 
             </div>

@@ -9,6 +9,15 @@ class Category_model extends CI_Model
         parent::__construct();
         $this->load->database();
     }
+    public function get_allcategory($limit, $start)
+    {
+        $this->db->select('*');
+        $this->db->from('category');
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit($limit, $start);
+        $query = $this->db->get();
+        return $query->result();
+    }
     public function get_category()
     {
         $this->db->select('*');
@@ -17,20 +26,22 @@ class Category_model extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-    public function get_category_donasi()
+
+    public function get_category_home()
     {
         $this->db->select('*');
         $this->db->from('category');
-        $this->db->where('category_type', 'Donasi');
-        $this->db->order_by('id', 'DESC');
+        $this->db->limit(5);
+        $this->db->order_by('id', 'ASC');
         $query = $this->db->get();
         return $query->result();
     }
-    public function get_category_pengeluaran()
+
+    public function get_category_sidebar()
     {
         $this->db->select('*');
         $this->db->from('category');
-        $this->db->where('category_type', 'Pengeluaran');
+        $this->db->where('category_type', 'Blog');
         $this->db->order_by('id', 'DESC');
         $query = $this->db->get();
         return $query->result();
@@ -74,5 +85,14 @@ class Category_model extends CI_Model
     {
         $this->db->where('id', $data['id']);
         $this->db->delete('category', $data);
+    }
+
+    public function total_row()
+    {
+        $this->db->select('*');
+        $this->db->from('category');
+        $this->db->order_by('id', 'DESC');
+        $query = $this->db->get();
+        return $query->result();
     }
 }

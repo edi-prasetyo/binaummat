@@ -1,39 +1,32 @@
 <?php if ($this->session->userdata('id')) : ?>
 
-    <div class="breadcrumb-default">
-        <div class="container">
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?php echo base_url('') ?>"><i class="ti ti-home"></i> Home</a></li>
-                <li class="breadcrumb-item active"><?php echo $title ?></li>
-            </ul>
-        </div>
-    </div>
 
-    <div class="margin-top container">
+
+    <div class="container mb-3 my-5">
         <div class="row">
-            <div class="col-md-3">
 
-            </div>
 
-            <div class="col-md-9">
+            <div class="col-md-6 mx-auto">
                 <div class="card">
 
                     <?php
                     echo form_open_multipart('myaccount/update');
                     ?>
-
+                    <div class="card-header bg-white">
+                        Ubah Profile, <?php echo $user->user_name; ?>
+                    </div>
                     <div class="card-body">
-                        <h2>Ubah Profile, <?php echo $user->user_name; ?></h2>
+
 
                         <div class="row">
 
                             <div class="col-3">
-                                Foto
+                                <img src="<?php echo base_url('assets/img/avatars/' . $user->user_image); ?>" width="50%" class="img-fluid">
                             </div>
                             <div class="col-9">
                                 <div class="input-group">
                                     <input type="file" name="user_image">
-                                    <img src="<?php echo base_url('assets/img/avatars/' . $user->user_image); ?>" width="50%" class="img img-thumbnail">
+
                                 </div>
 
                             </div>

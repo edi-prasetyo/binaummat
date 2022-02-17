@@ -5,156 +5,134 @@ $meta = $this->meta_model->get_meta();
 ?>
 
 
+<div class="d-flex" id="wrapper">
 
-<!-- Sidebar -->
-<ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-    <a class="sidebar-brand d-flex align-items-center justify-content-center bg-gradient-primary" href="<?php echo base_url('admin/dashboard'); ?>">
-
-        <div class="sidebar-brand-icon">
-            <i class="ti-lock"></i> </div>
-        <div class="sidebar-brand-text mx-3">Admin</div>
-    </a>
-    <hr class="sidebar-divider my-0">
-
-    <?php if ($user->role_id == 1) : ?>
-        <li class="nav-item active">
-            <a class="nav-link" href="<?php echo base_url('admin/dashboard'); ?>">
-                <i class="ti-home fa-fw"></i>
-                <span>Dashboard</span></a>
-        </li>
-
-
-
-
-
-
-
-        <div class="sidebar-heading">
-            MASTER DATA
-        </div>
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/pemasukan'); ?>">
-                <i class="fa-fw ti-import text-success"></i>
-                <span>Pemasukan</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/pengeluaran'); ?>">
-                <i class="fa-fw ti-export text-danger"></i>
-                <span>Pengeluaran</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/kas'); ?>">
-                <i class="fa-fw ti-credit-card text-info"></i>
-                <span>Saldo</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/category'); ?>">
-                <i class="fa-fw ti-bookmark-alt text-primary"></i>
-                <span>kategori</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/asrama'); ?>">
-                <i class="fa-fw fas fa-store text-primary"></i>
-                <span>Asrama</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/cabang'); ?>">
-                <i class="fa-fw fas fa-users text-primary"></i>
-                <span>User</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/myaccount'); ?>">
-                <i class="fa-fw ti-user text-primary"></i>
-                <span>My Account</span>
-            </a>
-        </li>
-
-
-        <div class="sidebar-heading">
-            Seting Web
-        </div>
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true" aria-controls="collapsePage">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Site Setings</span>
-            </a>
-            <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <!-- <h6 class="collapse-header">Example Pages</h6> -->
-                    <a class="collapse-item" href="<?php echo base_url('admin/meta'); ?>">Setings</a>
-                    <a class="collapse-item" href="<?php echo base_url('admin/meta/logo'); ?>">Logo</a>
-                    <a class="collapse-item" href="<?php echo base_url('admin/meta/favicon'); ?>">Favicon</a>
+    <!-- Sidebar -->
+    <!-- Sidebar -->
+    <div class="border-end pb-5" id="sidebar-wrapper">
+        <div class="sidebar-heading text-transparent"> </div>
+        <div class="py-4 px-3">
+            <div class="media">
+                <img src="<?php echo base_url('assets/img/avatars/' . $user->user_image); ?>" alt="..." width="65" class="mr-3 rounded-circle shadow-sm">
+                <div class="media-body my-3">
+                    <h5 class="m-0 text-muted"><?php echo $user->user_name; ?></h5>
+                    <small class="font-weight-light mb-0 text-success"><i class="fas fa-circle text-success"></i> Online</small>
                 </div>
             </div>
-        </li>
-        <!-- <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('admin/menu'); ?>">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Menu</span>
-        </a>
-    </li> -->
-
-        <!-- MENU ADMIN CABANG -->
-
-    <?php else : ?>
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/home'); ?>">
-                <i class="ti-home fa-fw"></i>
-                <span>Home</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/home/pemasukan'); ?>">
-                <i class="fa-fw ti-import text-success"></i>
-                <span>Pemasukan</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/home/pengeluaran'); ?>">
-                <i class="fa-fw ti-export text-danger"></i>
-                <span>Pengeluaran</span>
-            </a>
-        </li>
-        <div class="sidebar-heading">
-            PENGATURAN AKUN
         </div>
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/myaccount'); ?>">
-                <i class="ti-user fa-fw"></i>
-                <span>Akun Saya</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/myaccount/update'); ?>">
-                <i class="ti-comments-smiley fa-fw"></i>
-                <span>Ubah Profile</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('admin/myaccount/ubah_password'); ?>">
-                <i class="ti-lock fa-fw"></i>
-                <span>Ganti Password</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('auth/logout'); ?>">
-                <i class="ti-plug fa-fw"></i>
-                <span>Logout</span></a>
-        </li>
-    <?php endif; ?>
+        <p class="text-muted font-weight-bold text-uppercase px-3 small pb-2 mb-0"><b>Main</b></p>
 
+        <ul class="nav flex-column  mb-0">
 
-</ul>
-<!-- Sidebar -->
+            <li class="nav-item">
+                <a href="<?php echo base_url('admin/dashboard'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "dashboard") {
+                                                                                            echo 'active';
+                                                                                        } ?>">
+                    <i class="feather-home  fa-fw"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?php echo base_url('admin/category'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "category") {
+                                                                                        echo 'active';
+                                                                                    } ?>">
+                    <i class="feather-tag mr-3  fa-fw"></i>
+                    Kategori
+                </a>
+            </li>
 
-<div id="content-wrapper" class="d-flex flex-column">
-    <div id="content">
+            <li class="nav-item">
+                <a href="<?php echo base_url('admin/donasi'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "donasi") {
+                                                                                        echo 'active';
+                                                                                    } ?>">
+                    <i class="feather-folder mr-3  fa-fw"></i>
+                    Donasi
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?php echo base_url('admin/transaction'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "transaction") {
+                                                                                            echo 'active';
+                                                                                        } ?>">
+                    <i class="feather-shopping-bag mr-3  fa-fw"></i>
+                    Transaksi
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?php echo base_url('admin/bank'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "bank") {
+                                                                                    echo 'active';
+                                                                                } ?>">
+                    <i class="feather-credit-card mr-3  fa-fw"></i>
+                    Data Bank
+                </a>
+            </li>
+
+            <p class="text-muted font-weight-bold text-uppercase px-3 small py-2 mb-0"><b>Web Front</b></p>
+            <li class="nav-item">
+
+                <a href="<?php echo base_url('admin/berita'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "berita") {
+                                                                                        echo 'active';
+                                                                                    } ?>">
+                    <i class="feather-rss mr-3  fa-fw"></i>
+                    Berita
+                </a>
+
+                <a href="<?php echo base_url('admin/page'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "page") {
+                                                                                    echo 'active';
+                                                                                } ?>">
+                    <i class="feather-file-text mr-3  fa-fw"></i>
+                    Page
+                </a>
+                <a href="<?php echo base_url('admin/layanan'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "layanan") {
+                                                                                        echo 'active';
+                                                                                    } ?>">
+                    <i class="feather-file-text mr-3  fa-fw"></i>
+                    Layanan
+                </a>
+                <a href="<?php echo base_url('admin/galery'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "galery") {
+                                                                                        echo 'active';
+                                                                                    } ?>">
+                    <i class="feather-camera mr-3  fa-fw"></i>
+                    Galery
+                </a>
+
+            </li>
+            <p class="text-muted font-weight-bold text-uppercase px-3 small py-2 mb-0"><b>Pengaturan</b></p>
+
+            <li class="nav-item">
+                <a href="<?php echo base_url('admin/user'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "user") {
+                                                                                    echo 'active';
+                                                                                } ?>">
+                    <i class="feather-user mr-3  fa-fw"></i>
+                    User
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?php echo base_url('admin/meta'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "meta") {
+                                                                                    echo 'active';
+                                                                                } ?>">
+                    <i class="feather-settings mr-3  fa-fw"></i>
+                    Profile Web
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?php echo base_url('admin/pengaturan'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "pengaturan") {
+                                                                                            echo 'active';
+                                                                                        } ?>">
+                    <i class="feather-mail mr-3  fa-fw"></i>
+                    Email Manajemen
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<?php echo base_url('admin/menu'); ?>" class="nav-link <?php if ($this->uri->segment(2) == "menu") {
+                                                                                    echo 'active';
+                                                                                } ?>">
+                    <i class="feather-book-open mr-3  fa-fw"></i>
+                    Menu
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- End Sidebar -->

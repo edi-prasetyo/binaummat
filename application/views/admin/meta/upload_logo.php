@@ -1,5 +1,5 @@
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
+<div class="card">
+    <div class="card-header">
         <?php echo $title; ?>
     </div>
     <div class="card-body">
@@ -43,13 +43,13 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary btn-lg" value="Upload Logo">
+                    <input type="submit" class="btn btn-primary" value="Upload Logo">
                 </div>
 
             </div>
 
             <div class="col-md-6">
-                Logo Saat Ini
+                Logo Saat Ini <br>
                 <?php if ($meta->logo != "") { ?>
                     <img src="<?php echo base_url('assets/img/logo/' . $meta->logo) ?>" class="img-fluid">
                 <?php } else { ?>

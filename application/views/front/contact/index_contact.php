@@ -1,26 +1,39 @@
-<div class="breadcrumb-default">
+<?php
+$meta = $this->meta_model->get_meta();
+
+// error_reporting(0);
+// ini_set('display_errors', 0);
+?>
+<div class="breadcrumb">
     <div class="container">
-        <ul class="breadcrumb">
+        <ul class="breadcrumb my-3">
             <li class="breadcrumb-item"><a href="<?php echo base_url('') ?>"><i class="ti ti-home"></i> Home</a></li>
             <li class="breadcrumb-item active"><?php echo $title ?></li>
         </ul>
     </div>
 </div>
 
-<div class="margin-top container">
-    <div class="col-md-9">
-        <div class="card">
-            <div class="card-body">
-                <h2>Contact Us</h2>
-                <p>Untuk Informasi dan Pemesanan Silahkan Hubungi Kami melalui</p>
-                <ul>
-                    <li>
-                        <i class="ti-home"></i> Head Office : Jl. Pondok Jagung Timur No. 46, Kelurahan Pondok jagung timur, kec.
-                        Serpong Utara - Tangerang Selatan - banten - Indonesia, 15326.</li>
-                    <li><i class="fa fa-phone"></i> Telp. No : +62 21 53133583</li>
-                    <li><i class=" ti-printer"></i> Fax. No : +62 21 53133583</li>
-                </ul>
+<div class="container mb-3">
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-5">
+                    <h2>Contact Us</h2>
+                    <p>Untuk Informasi dan Pemesanan Silahkan Hubungi Kami melalui</p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <i class="bi-house"></i> <?php echo $meta->alamat; ?>
+                        </li>
+                        <li><i class="bi-telephone"></i> <?php echo $meta->telepon; ?></li>
+
+                    </ul>
+                </div>
+                <div class="col-md-7">
+                    <?php echo $meta->map; ?>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
