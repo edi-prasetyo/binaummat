@@ -91,25 +91,25 @@
         visibility: hidden;
     }
 </style>
-<div class="breadcrumb">
-    <div class="container">
-        <ul class="breadcrumb my-3">
-            <li class="breadcrumb-item"><a href="<?php echo base_url('') ?>"><i class="ti ti-home"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="<?php echo base_url('donasi') ?>"> Donasi</a></li>
 
-            <li class="breadcrumb-item active"><?php echo $title ?></li>
-        </ul>
+<nav class="site-header bg-white sticky-top py-1 shadow-sm">
+    <div class="container py-2 d-flex justify-content-between align-items-center">
+        <a style="text-decoration:none;" class="text-dark text-left" href="javascript:history.back()"><i style="font-size: 25px;" class="ri-arrow-left-line"></i></a>
+        <span class="text-dark text-center font-weight-bold">
+            <?php echo substr($title, 0, 25); ?>
+        </span>
+        <div style="color:transparent;"></div>
     </div>
-</div>
+</nav>
 
 
-<div class="container my-3">
+<div class="container my-3 mb-5 pb-3">
 
     <div class="col-md-7 mx-auto">
         <div class="card mb-3">
             <div class="card-body row">
-                <div class="col-3"><img class="img-fluid" src="<?php echo base_url('assets/img/donasi/' . $donasi->donasi_image); ?>"> </div>
-                <div class="col-9">
+                <div class="col-md-3"><img class="img-fluid" src="<?php echo base_url('assets/img/donasi/' . $donasi->donasi_image); ?>"> </div>
+                <div class="col-md-9">
                     <h4><?php echo $donasi->donasi_title; ?></h4>
                 </div>
             </div>
@@ -136,7 +136,7 @@
             <div class="card-body">
                 <div class="row">
                     <?php foreach ($bank as $bank) : ?>
-                        <div class="col-6">
+                        <div class="col-md-6">
                             <div class="inputGroup">
                                 <input id="radio<?php echo $bank->id; ?>" name="bank_id" value="<?php echo $bank->id; ?>" type="radio">
                                 <label for="radio<?php echo $bank->id; ?>">
@@ -181,9 +181,9 @@
                     <label>Do'a Khusus</label>
                     <textarea class="form-control" name="doa_khusus" placeholder="Doa Khusus"></textarea>
                 </div>
-                <div class="form-group mb-2">
+                <div style="z-index: 9999;" class="carbook-menu-fotter fixed-bottom bg-white px-3 py-2 p-5 text-center shadow">
 
-                    <button type="submit" class="btn btn-success">Proses Pembayaran</button>
+                    <button type="submit" class="btn-order-block">Proses Pembayaran <i class="ri-arrow-right-line"></i></button>
                 </div>
             </div>
         </div>

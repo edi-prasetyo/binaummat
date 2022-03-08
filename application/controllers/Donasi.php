@@ -185,15 +185,7 @@ class Donasi extends CI_Controller
                 'required'     => 'Nominal Donasi Harus Di Isi',
             ]
         );
-        $this->form_validation->set_rules(
-            'donatur_email',
-            'Email',
-            'required|trim|valid_email',
-            [
-                'required'            => 'Email harus di isi',
-                'valid_email'         => 'Format email Tidak sesuai'
-            ]
-        );
+
 
         if ($this->form_validation->run() == false) {
 
@@ -203,7 +195,7 @@ class Donasi extends CI_Controller
                     'title'             => 'Checkout',
                     'deskripsi'         => 'Checkout',
                     'keywords'          => 'Checkout',
-                    'bank'          => $bank,
+                    'bank'              => $bank,
                     'donasi'            => $donasi,
                     'content'           => 'front/donasi/checkout'
                 );
@@ -216,7 +208,7 @@ class Donasi extends CI_Controller
                     'keywords'      => 'Checkout',
                     'bank'          => $bank,
                     'donasi'            => $donasi,
-                    'content'           => 'front/donasi/checkout'
+                    'content'           => 'mobile/donasi/checkout'
                 );
                 $this->load->view('mobile/layout/wrapp', $data, FALSE);
             }
@@ -327,7 +319,7 @@ class Donasi extends CI_Controller
                 'title'                           => 'Payment',
                 'deskripsi'                       => 'Payment',
                 'keywords'                        => 'Payment',
-                'last_transaksi'                  => $last_transaction,
+                'last_transaction'                  => $last_transaction,
                 'bank'                            => $bank,
                 'content'                         => 'mobile/donasi/payment'
             ];
@@ -405,12 +397,13 @@ class Donasi extends CI_Controller
 
     public function success($insert_id = NULL)
     {
-        $last_transaction                   = $this->transaction_model->last_transaction($insert_id);
+        $last_transaction        = $this->transaction_model->last_transaction($insert_id);
+
 
         if (!$this->agent->is_mobile()) {
             // Desktop View
             $data = [
-                'title'                           => 'Payment',
+                'title'                           => 'Success',
                 'deskripsi'                       => 'Payment',
                 'keywords'                        => 'Payment',
                 'last_transaction'                => $last_transaction,
@@ -420,10 +413,10 @@ class Donasi extends CI_Controller
         } else {
             // Mobile View
             $data = [
-                'title'                           => 'Payment',
+                'title'                           => 'Success',
                 'deskripsi'                       => 'Payment',
                 'keywords'                        => 'Payment',
-                'last_transaksi'                  => $last_transaction,
+                'last_transaction'                  => $last_transaction,
                 'content'                         => 'mobile/donasi/success'
             ];
             $this->load->view('mobile/layout/wrapp', $data, FALSE);

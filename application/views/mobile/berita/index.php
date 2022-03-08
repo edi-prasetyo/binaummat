@@ -15,8 +15,8 @@
             <a href="<?php echo base_url('berita/detail/' . $data->berita_slug); ?>" class="text-muted text-decoration-none">
                 <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                     <div class="img-frame">
-                        <div class="star position-absolute"><span class="badge badge-success"><i class="ri-price-tag-3-line"></i> <?php echo $data->category_name; ?></span></div>
-                        <div class="favourite-heart text-danger position-absolute"><i class="ri-heart-3-line"></i></div>
+
+                        <div class="favourite-heart text-danger position-absolute"><span class="badge badge-success"> <?php echo $data->category_name; ?></span></div>
 
                         <img src="<?php echo base_url('assets/img/artikel/' . $data->berita_gambar); ?>" class="card-img">
                     </div>
@@ -24,12 +24,8 @@
                         <div class="list-card-body">
                             <h6 class="mb-1"><?php echo substr($data->berita_title, 0, 35); ?>..
                             </h6>
-                            <p class="text-gray mb-1 small"><?php echo date(' j, F Y', strtotime($data->date_created)); ?></p>
-                            <p class="text-gray mb-1 rating">
-
-                            </p>
+                            <p class="text-gray mb-1 small"><i class="ri-calendar-event-line"></i> <?php echo date(' j, F Y', strtotime($data->date_created)); ?></p>
                         </div>
-
                     </div>
                 </div>
             </a>
