@@ -6,8 +6,8 @@
                 <div class="col-md-7">
                     <div class="card-body">
                         <div style="line-height: 35px;">
-                            <h3><b>Booking Lebih Mudah dengan Login Ke akun</b></h3>
-                            Silahkan Login untuk lebih mudah dalam melakukan pesanan, Jika anda belum memiliki akun silahkan Datfar Gratis sekarang juga.<br><br>
+                            <h3><b>Sedekah Lebih Mudah dan tercatat di system kami</b></h3>
+                            Silahkan Login untuk lebih mudah dalam melakukan Sedekah, Jika anda belum memiliki akun silahkan Datfar Gratis sekarang juga.<br><br>
                         </div>
                     </div>
                 </div>

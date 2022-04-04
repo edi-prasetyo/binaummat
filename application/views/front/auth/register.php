@@ -12,7 +12,7 @@ $meta = $this->meta_model->get_meta();
                     <div class="card-body">
                         <div style="line-height: 35px;">
                             <h3><b>Daftar Gratis dan Mudah</b></h3>
-                            Cukup beberapa langkah anda bisa menikmati layanan sewa mobil dari kami.<br><br>
+                            Cukup beberapa langkah anda bisa menikmati layanan di Bina Ummat.<br><br>
                         </div>
                     </div>
                 </div>

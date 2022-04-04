@@ -16,10 +16,9 @@
   <link rel="stylesheet" href="<?php echo base_url('assets/template/mobile/'); ?>css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url('assets/template/mobile/'); ?>css/style.css">
   <link rel="stylesheet" href="<?php echo base_url(''); ?>assets/template/front/vendor/date-time-picker-bootstrap-4/css/bootstrap-datetimepicker.min.css" />
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/template/front/vendor/slick/slick.css">
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/template/front/vendor/slick/slick-theme.css">
   <!-- Icon -->
   <link rel="stylesheet" href="<?php echo base_url('assets/template/mobile/'); ?>icon/remixicon/remixicon.css">
+  <link rel="stylesheet" href="<?php echo base_url('assets/template/mobile/'); ?>icon/fontawesome6/css/all.min.css">
 
 </head>
 

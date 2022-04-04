@@ -38,9 +38,6 @@ $meta = $this->meta_model->get_meta();
   <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/template/front/icon/bootstrap-icons/font/bootstrap-icons.css">
   <link rel="stylesheet" href="<?php echo base_url(''); ?>assets/template/css/component-chosen.css">
   <link rel="stylesheet" href="<?php echo base_url(''); ?>assets/template/front/vendor/date-time-picker-bootstrap-4/css/bootstrap-datetimepicker.min.css" />
-
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/template/front/vendor/slick/slick.css">
-  <link rel="stylesheet" href="<?php echo base_url() ?>assets/template/front/vendor/slick/slick-theme.css">
   <!-- Font CSS File -->
   <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/template/front/fonts/open-sans/styles.css">
 

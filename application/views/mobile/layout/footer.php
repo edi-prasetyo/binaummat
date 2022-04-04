@@ -12,7 +12,7 @@ $page      = $this->page_model->get_page();
                            echo 'selected text-info';
                         } ?>">
          <a href="<?php echo base_url(); ?>" class="text-dark small font-weight-bold text-decoration-none">
-            <p class="h4 m-0"><i class="ri-home-2-line"></i></p>
+            <p class="h4 m-0"><i class="fa-solid fa-house"></i></p>
             Home
          </a>
       </div>
@@ -22,7 +22,7 @@ $page      = $this->page_model->get_page();
                            echo 'selected text-info';
                         } ?>">
          <a href="<?php echo base_url('donasi'); ?>" class="text-dark small font-weight-bold text-decoration-none">
-            <p class="h4 m-0"><i class="ri-wallet-line"></i></p>
+            <p class="h4 m-0"><i class="fa-solid fa-wallet"></i></p>
             Donasi
          </a>
       </div>
@@ -34,7 +34,7 @@ $page      = $this->page_model->get_page();
                            echo 'selected text-info';
                         } ?>">
          <a href="<?php echo base_url('berita'); ?>" class="text-dark small font-weight-bold text-decoration-none">
-            <p class="h4 m-0"><i class="ri-file-list-3-line"></i></p>
+            <p class="h4 m-0"><i class="fa-solid fa-fire-flame-curved"></i></p>
             Berita
          </a>
       </div>
@@ -43,8 +43,8 @@ $page      = $this->page_model->get_page();
                            echo 'selected text-info';
                         } ?>">
          <a href="<?php echo base_url('page'); ?>" class="text-dark small font-weight-bold text-decoration-none">
-            <p class="h4 m-0"><i class="ri-cup-line"></i></p>
-            Tentang
+            <p class="h4 m-0"><i class="fa-solid fa-coins"></i></p>
+            Info
          </a>
       </div>
 
@@ -79,15 +79,13 @@ $page      = $this->page_model->get_page();
 </div>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/template/mobile/'); ?>js/slick.min.js"></script>
+
 <script src="<?php echo base_url('assets/template/mobile/'); ?>js/main.js"></script>
 <script src="<?php echo base_url() ?>assets/template/front/vendor/bootstrap/js/bootstrap.min.js"></script>
 
 <script src="<?php echo base_url() ?>assets/template/front/vendor/date-time-picker-bootstrap-4/js/moment.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url() ?>assets/template/front/vendor/date-time-picker-bootstrap-4/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 
-<script src="<?php echo base_url() ?>assets/template/front/vendor/slick/slick.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url() ?>assets/template/front/js/theme.js" type="text/javascript"></script>
 
 <script>
    $(function() {

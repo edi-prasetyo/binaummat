@@ -68,8 +68,7 @@ $page      = $this->page_model->get_page();
 <script src="<?php echo base_url() ?>assets/template/front/vendor/offcanvas/offcanvas.js" type="text/javascript"></script>
 
 
-<script src="<?php echo base_url() ?>assets/template/front/vendor/slick/slick.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url() ?>assets/template/front/js/theme.js" type="text/javascript"></script>
+
 
 <!-- Color Picker JS -->
 
