@@ -19,6 +19,7 @@ class Donasi_model extends CI_Model
     $this->db->join('category', 'category.id = donasi.category_id', 'LEFT');
     $this->db->join('user', 'user.id = donasi.user_id', 'LEFT');
     //End Join
+
     $this->db->order_by('id', 'DESC');
     $this->db->limit($limit, $start);
     $query = $this->db->get();
@@ -170,7 +171,7 @@ class Donasi_model extends CI_Model
     $this->db->join('category', 'category.id = donasi.category_id', 'LEFT');
     $this->db->join('user', 'user.id = donasi.user_id', 'LEFT');
     //End Join
-    $this->db->where(['category_id'     =>  $category_id]);
+    $this->db->where(['category_id'     =>  $category_id, 'donasi_status' => 1]);
     $this->db->limit($limit, $start);
     $this->db->order_by('id', 'DESC');
     $query = $this->db->get();
