@@ -71,38 +71,23 @@
 
 <!-- Most sales -->
 
-<!-- <section class="bg-white">
-
-	<div class="p-3 title d-flex align-items-center">
-		<h5 class="m-0 pt-3">Promo</h5>
-		<a class="pt-3 font-weight-bold ml-auto" href="#">Detail Promo <i class="feather-chevrons-right"></i></a>
+<section class="bg-white">
+	<div class="container">
+		<div class="p-3 title d-flex align-items-center">
+			<h5 class="m-0 pt-3">Event</h5>
+			<a class="pt-3 font-weight-bold ml-auto" href="#"> <i class="feather-chevrons-right"></i></a>
+		</div>
+		<?php foreach ($galery_featured as $featured) : ?>
+			<div class="offer-slider bg-white">
+				<div class="cat-item px-1 py-3">
+					<a class="bg-white d-block text-center shadow" href="<?php echo $featured->galery_url; ?>">
+						<img src="<?php echo base_url('assets/img/galery/' . $featured->galery_img); ?>" class="img-fluid rounded">
+					</a>
+				</div>
+			</div>
+		<?php endforeach; ?>
 	</div>
-
-	<div class="offer-slider bg-white border-bottom">
-
-		<div class="cat-item px-1 py-3">
-			<a class="bg-white d-block text-center shadow" href="trending.html">
-				<img src="assets/img/promo/pro1.jpg" class="img-fluid rounded">
-			</a>
-		</div>
-		<div class="cat-item px-1 py-3">
-			<a class="bg-white d-block text-center shadow" href="trending.html">
-				<img src="assets/img/promo/pro2.jpg" class="img-fluid rounded">
-			</a>
-		</div>
-		<div class="cat-item px-1 py-3">
-			<a class="bg-white d-block text-center shadow" href="trending.html">
-				<img src="assets/img/promo/pro3.jpg" class="img-fluid rounded">
-			</a>
-		</div>
-		<div class="cat-item px-1 py-3">
-			<a class="bg-white d-block text-center shadow" href="trending.html">
-				<img src="assets/img/promo/pro4.jpg" class="img-fluid rounded">
-			</a>
-		</div>
-	</div>
-
-</section> -->
+</section>
 
 
 <!-- Most sales -->

@@ -9,13 +9,13 @@ $menu           = $this->menu_model->get_menu();
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white shadow-sm" id="top">
   <div class="container">
-    <a class="navbar-brand" href="<?php echo base_url() ?>"><img height="40px" class="img-fluid" src="<?php echo base_url('assets/img/logo/' . $meta->logo) ?>"></a>
+    <a class="navbar-brand" href="<?php echo base_url() ?>"><img style="height:60px;width:auto" class="img-fluid" src="<?php echo base_url('assets/img/logo/' . $meta->logo) ?>"></a>
     <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" style="font-size: 18px;">
         <?php foreach ($menu as $data) : ?>
           <li class="nav-item"><a class="nav-link" href="<?php echo base_url($data->url); ?>"> <?php echo $data->nama_menu_ind; ?> </a></li>
         <?php endforeach; ?>

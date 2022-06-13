@@ -130,18 +130,18 @@
     </div>
 </div>
 
-
-<div class="container my-3">
+<div class="container">
 
     <div class="col-md-7 mx-auto">
-        <div class="card mb-3">
-            <div class="card-body row">
-                <div class="col-3"><img class="img-fluid" src=""> </div>
-                <div class="col-9">
-                    <h4>Qurban</h4>
+        <?php foreach ($galery_featured as $featured) : ?>
+            <div class="offer-slider">
+                <div class="cat-item py-3">
+                    <a class="d-block text-center" href="<?php echo $featured->galery_url; ?>">
+                        <img src="<?php echo base_url('assets/img/galery/' . $featured->galery_img); ?>" class="img-fluid rounded">
+                    </a>
                 </div>
             </div>
-        </div>
+        <?php endforeach; ?>
         <?php echo form_open('qurban'); ?>
 
 

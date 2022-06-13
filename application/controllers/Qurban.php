@@ -18,12 +18,13 @@ class Qurban extends CI_Controller
         $this->load->model('transaction_model');
         $this->load->model('bank_model');
         $this->load->model('pengaturan_model');
+        $this->load->model('galery_model');
         $this->load->model('qurban_model');
     }
     public function index()
 
     {
-
+        $galery_featured            = $this->galery_model->featured();
         $bank = $this->bank_model->get_allbank();
         $qurban = $this->qurban_model->get_qurban();
         $send_email_order   = $this->pengaturan_model->sendemail_status_order();
@@ -46,6 +47,7 @@ class Qurban extends CI_Controller
                     'keywords'                    => 'qurban, idul adha, hari raya qurban, qurban berkah',
                     'bank'                        => $bank,
                     'qurban'                      => $qurban,
+                    'galery_featured'             => $galery_featured,
                     'content'                     => 'front/qurban/index'
                 ];
                 $this->load->view('front/layout/wrapp', $data, FALSE);
@@ -99,6 +101,7 @@ class Qurban extends CI_Controller
                 'keywords'                    => 'qurban, idul adha, hari raya qurban, qurban berkah',
                 'bank'                        => $bank,
                 'qurban'                      => $qurban,
+                'galery_featured'             => $galery_featured,
                 'content'                     => 'mobile/qurban/index'
             );
             $this->load->view('mobile/layout/wrapp', $data, FALSE);
