@@ -220,7 +220,6 @@ class Donasi extends CI_Controller
             $total_nominal =  $donasi_nominal + $total;
             $kode_unik = substr($total_nominal, -3);
 
-            $invoice_number = strtoupper(random_string('numeric', 12));
             $donasi_id      = $donasi->id;
             $donasi_title   = $donasi->donasi_title;
             $category_id    = $donasi->category_id;
@@ -235,8 +234,6 @@ class Donasi extends CI_Controller
                 'donasi_id'             => $donasi_id,
                 'category_id'           => $category_id,
                 'donasi_title'          => $donasi_title,
-                'donasi_number'         => $invoice_number,
-                'invoice_number'        => 'INV-' . $invoice_number,
                 'donatur_name'          => $this->input->post('donatur_name'),
                 'donatur_email'         => $this->input->post('donatur_email'),
                 'donatur_phone'         => $this->input->post('donatur_phone'),
@@ -254,6 +251,7 @@ class Donasi extends CI_Controller
 
 
             $insert_id = $this->transaction_model->create($data);
+            $this->create_incoice_number($insert_id);
 
             if ($send_email_order->status == 1) {
                 $this->_sendEmail($insert_id);
@@ -266,10 +264,20 @@ class Donasi extends CI_Controller
         }
     }
 
+    public function create_incoice_number($insert_id)
+    {
+        $invoice_number = str_pad($insert_id, 11, '0', STR_PAD_LEFT);
+        $data = [
+            'donasi_number'         => $invoice_number,
+            'invoice_number'        => 'INV-' . $invoice_number,
+        ];
+        $this->transaction_model->update($data);
+    }
+
     private function _sendEmail($insert_id)
     {
         $email_order = $this->pengaturan_model->email_order();
-        $transaction  = $this->transaksi_model->detail_transaksi($insert_id);
+        $transaction  = $this->transaction_model->detail_transaction($insert_id);
         // $meta = $this->meta_model->get_meta();
 
         $config = [
@@ -347,7 +355,7 @@ class Donasi extends CI_Controller
                 $data = array(
                     'title'         => 'Konfirmasi',
                     'deskripsi'     => 'Deskripsi',
-                    'keywords'      => 'Transaksi',
+                    'keywords'      => 'transaction',
                     'last_transaction'     => $last_transaction,
                     'bank'          => $bank,
                     'error_upload'  => $this->upload->display_errors(),
@@ -359,7 +367,7 @@ class Donasi extends CI_Controller
                 $data = array(
                     'title'         => 'Konfirmasi',
                     'deskripsi'     => 'Deskripsi',
-                    'keywords'      => 'Transaksi',
+                    'keywords'      => 'transaction',
                     'last_transaction'     => $last_transaction,
                     'bank'          => $bank,
                     'error_upload'  => $this->upload->display_errors(),

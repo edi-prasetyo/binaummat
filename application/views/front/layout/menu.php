@@ -9,7 +9,7 @@ $menu           = $this->menu_model->get_menu();
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white shadow-sm" id="top">
   <div class="container">
-    <a class="navbar-brand" href="<?php echo base_url() ?>"><img class="img-fluid" src="<?php echo base_url('assets/img/logo/' . $meta->logo) ?>"></a>
+    <a class="navbar-brand" href="<?php echo base_url() ?>"><img height="40px" class="img-fluid" src="<?php echo base_url('assets/img/logo/' . $meta->logo) ?>"></a>
     <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
       <span class="navbar-toggler-icon"></span>
     </button>

@@ -1,6 +1,9 @@
 <div class="container my-5">
     <div class="col-md-6 mx-auto">
         <div class="card">
+            <div class="card-header">
+                <?php echo $last_transaction->donasi_title; ?>
+            </div>
             <div class="card-body">
                 <div class="justify-content-center text-center">
                     Nomor Pembayaran<br>
@@ -15,7 +18,7 @@
 
                         <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: transparent;">
                             Nominal Donasi
-                            <span class="text-muted"><?php echo $last_transaction->total_nominal; ?> </span>
+                            <span class="text-muted"><?php echo number_format($last_transaction->total_nominal, 0, ",", "."); ?> </span>
 
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: transparent;"> Kode Unik

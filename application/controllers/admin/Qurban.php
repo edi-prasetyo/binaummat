@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Category extends CI_Controller
+class Qurban extends CI_Controller
 {
     //load data
     public function __construct()
     {
         parent::__construct();
         $this->load->library('pagination');
-        $this->load->model('category_model');
+        $this->load->model('qurban_model');
 
         $id = $this->session->userdata('id');
         $user = $this->user_model->user_detail($id);
@@ -16,12 +16,12 @@ class Category extends CI_Controller
             redirect('admin/dashboard');
         }
     }
-    //Index Category
+    //Index Qurban
     public function index()
     {
 
-        $config['base_url']       = base_url('admin/category/index/');
-        $config['total_rows']     = count($this->category_model->total_row());
+        $config['base_url']       = base_url('admin/qurban/index/');
+        $config['total_rows']     = count($this->qurban_model->total_row());
         $config['per_page']       = 10;
         $config['uri_segment']    = 4;
 
@@ -53,35 +53,35 @@ class Category extends CI_Controller
         $this->pagination->initialize($config);
 
 
-        $category = $this->category_model->get_category($limit, $start);
+        $qurban = $this->qurban_model->get_qurban($limit, $start);
 
         $data = [
-            'title'             => 'Category',
-            'category'          => $category,
+            'title'             => 'Qurban',
+            'qurban'          => $qurban,
             'pagination'    => $this->pagination->create_links(),
-            'content'           => 'admin/category/index_category'
+            'content'           => 'admin/qurban/index'
         ];
         $this->load->view('admin/layout/wrapp', $data, FALSE);
     }
 
 
-    //Create New Category
+    //Create New Qurban
     public function create()
     {
         // Validasi
         $this->form_validation->set_rules(
-            'category_name',
+            'qurban_name',
             'Nama Kategori',
             'required',
             array(
                 'required'         => '%s Harus Diisi',
-                'is_unque'         => '%s <strong>' . $this->input->post('category_name') .
+                'is_unque'         => '%s <strong>' . $this->input->post('qurban_name') .
                     '</strong>Nama Kategori Sudah Ada. Buat Nama yang lain!'
             )
         );
         if ($this->form_validation->run()) {
 
-            $config['upload_path']          = './assets/img/category/';
+            $config['upload_path']          = './assets/img/galery/';
             $config['allowed_types']        = 'gif|jpg|png|jpeg|svg';
             $config['max_size']             = 500000; //Dalam Kilobyte
             $config['max_width']            = 500000; //Lebar (pixel)
@@ -89,13 +89,13 @@ class Category extends CI_Controller
             $config['remove_spaces']        = TRUE;
             $config['encrypt_name']         = TRUE;
             $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('category_image')) {
+            if (!$this->upload->do_upload('qurban_image')) {
 
                 //End Validasi
                 $data = [
-                    'title'         => 'Tambah Category',
+                    'title'         => 'Tambah Qurban',
                     'error_upload'  => $this->upload->display_errors(),
-                    'content'       => 'admin/category/create_category'
+                    'content'       => 'admin/qurban/create'
                 ];
                 $this->load->view('admin/layout/wrapp', $data, FALSE);
 
@@ -106,7 +106,7 @@ class Category extends CI_Controller
 
                 $upload_data    = array('uploads'  => $this->upload->data());
                 $config['image_library']    = 'gd2';
-                $config['source_image']     = './assets/img/category/' . $upload_data['uploads']['file_name'];
+                $config['source_image']     = './assets/img/galery/' . $upload_data['uploads']['file_name'];
                 $config['create_thumb']     = TRUE;
                 $config['maintain_ratio']   = TRUE;
                 $config['width']            = 500;
@@ -115,37 +115,38 @@ class Category extends CI_Controller
 
                 $this->load->library('image_lib', $config);
                 $this->image_lib->resize();
-                $category_slug  = url_title($this->input->post('category_name'), 'dash', TRUE);
+
                 $data  = [
-                    'category_slug'         => $category_slug,
-                    'category_name'         => $this->input->post('category_name'),
-                    'category_desc'         => $this->input->post('category_desc'),
-                    'category_image'        => $upload_data['uploads']['file_name'],
+                    'qurban_name'         => $this->input->post('qurban_name'),
+                    'qurban_price'         => $this->input->post('qurban_price'),
+                    'qurban_image'        => $upload_data['uploads']['file_name'],
                     'created_at'            => date('Y-m-d H:i:s')
                 ];
-                $this->category_model->create($data);
-                $this->session->set_flashdata('message', 'Data Category telah ditambahkan');
-                redirect(base_url('admin/category'), 'refresh');
+                $this->qurban_model->create($data);
+                $this->session->set_flashdata('message', 'Data Qurban telah ditambahkan');
+                redirect(base_url('admin/qurban'), 'refresh');
             }
         }
         //End Masuk Database
         $data = [
-            'title'        => 'Tambah Category',
-            'content'          => 'admin/category/create_category'
+            'title'        => 'Tambah Qurban',
+            'content'          => 'admin/qurban/create'
         ];
         $this->load->view('admin/layout/wrapp', $data, FALSE);
     }
     //Update
     public function update($id)
     {
-        $category = $this->category_model->detail_category($id);
+        $qurban = $this->qurban_model->detail_qurban($id);
+        // var_dump($qurban);
+        // die;
 
         //Validasi
         $valid = $this->form_validation;
 
         $valid->set_rules(
-            'category_name',
-            'Nama Kategori',
+            'qurban_name',
+            'Nama Qurban',
             'required',
             ['required'      => '%s harus diisi']
         );
@@ -153,9 +154,9 @@ class Category extends CI_Controller
 
         if ($valid->run()) {
             //Kalau nggak Ganti gambar
-            if (!empty($_FILES['category_image']['name'])) {
+            if (!empty($_FILES['qurban_image']['name'])) {
 
-                $config['upload_path']          = './assets/img/category/';
+                $config['upload_path']          = './assets/img/galery/';
                 $config['allowed_types']        = 'gif|jpg|png|jpeg|svg';
                 $config['max_size']             = 5000000; //Dalam Kilobyte
                 $config['max_width']            = 5000000; //Lebar (pixel)
@@ -163,14 +164,14 @@ class Category extends CI_Controller
                 $config['remove_spaces']        = TRUE;
                 $config['encrypt_name']         = TRUE;
                 $this->load->library('upload', $config);
-                if (!$this->upload->do_upload('category_image')) {
+                if (!$this->upload->do_upload('qurban_image')) {
 
                     //End Validasi
                     $data = [
-                        'title'        => 'Edit kategori',
-                        'category'     => $category,
-                        'error_upload' => $this->upload->display_errors(),
-                        'content'          => 'admin/category/update_category'
+                        'title'             => 'Edit Qurban',
+                        'qurban'            => $qurban,
+                        'error_upload'      => $this->upload->display_errors(),
+                        'content'           => 'admin/qurban/update'
                     ];
                     $this->load->view('admin/layout/wrapp', $data, FALSE);
 
@@ -178,15 +179,9 @@ class Category extends CI_Controller
 
                 } else {
 
-                    //Proses Manipulasi Gambar
                     $upload_data    = array('uploads'  => $this->upload->data());
-                    //Gambar Asli disimpan di folder assets/upload/image
-                    //lalu gambar Asli di copy untuk versi mini size ke folder assets/upload/image/thumbs
-
                     $config['image_library']    = 'gd2';
-                    $config['source_image']     = './assets/img/category/' . $upload_data['uploads']['file_name'];
-                    //Gambar Versi Kecil dipindahkan
-                    // $config['new_image']        = './assets/img/artikel/thumbs/' . $upload_data['uploads']['file_name'];
+                    $config['source_image']     = './assets/img/galery/' . $upload_data['uploads']['file_name'];
                     $config['create_thumb']     = TRUE;
                     $config['maintain_ratio']   = TRUE;
                     $config['width']            = 500;
@@ -197,64 +192,59 @@ class Category extends CI_Controller
 
                     $this->image_lib->resize();
 
-                    // Hapus Gambar Lama Jika Ada upload gambar baru
-                    if ($category->category_image != "") {
-                        unlink('./assets/img/category/' . $category->category_image);
-                        // unlink('./assets/img/artikel/thumbs/' . $berita->berita_gambar);
+                    if ($qurban->qurban_image != "") {
+                        unlink('./assets/img/galery/' . $qurban->qurban_image);
                     }
                     //End Hapus Gambar
 
                     $data  = [
-                        'id'                => $id,
-                        'category_name'         => $this->input->post('category_name'),
-                        'category_desc'         => $this->input->post('category_desc'),
-                        'category_image'        => $upload_data['uploads']['file_name'],
-                        'updated_at'      => date('Y-m-d H:i:s')
+                        'id'                    => $id,
+                        'qurban_name'           => $this->input->post('qurban_name'),
+                        'qurban_price'          => $this->input->post('qurban_price'),
+                        'qurban_image'          => $upload_data['uploads']['file_name'],
+                        'updated_at'            => date('Y-m-d H:i:s')
                     ];
-                    $this->category_model->update($data);
+                    $this->qurban_model->update($data);
                     $this->session->set_flashdata('message', 'Data telah di Update');
-                    redirect(base_url('admin/category'), 'refresh');
+                    redirect(base_url('admin/qurban'), 'refresh');
                 }
             } else {
-                //Update Berita Tanpa Ganti Gambar
-                // Hapus Gambar Lama Jika ada upload gambar baru
-                if ($category->category_image != "")
+                if ($qurban->qurban_image != "")
                     $data  = [
-                        'id'         => $id,
-                        'category_name'         => $this->input->post('category_name'),
-                        'category_desc'         => $this->input->post('category_desc'),
-                        'updated_at'          => date('Y-m-d H:i:s')
+                        'id'                    => $id,
+                        'qurban_name'           => $this->input->post('qurban_name'),
+                        'qurban_price'          => $this->input->post('qurban_price'),
+                        'updated_at'            => date('Y-m-d H:i:s')
                     ];
-                $this->category_model->update($data);
+                $this->qurban_model->update($data);
                 $this->session->set_flashdata('message', 'Data telah di Update');
-                redirect(base_url('admin/category'), 'refresh');
+                redirect(base_url('admin/qurban'), 'refresh');
             }
         }
         //End Masuk Database
         $data = [
-            'title'        => 'Update Berita',
-            'category'     => $category,
-            'content'          => 'admin/category/update_category'
+            'title'             => 'Update Berita',
+            'qurban'            => $qurban,
+            'content'           => 'admin/qurban/update'
         ];
         $this->load->view('admin/layout/wrapp', $data, FALSE);
     }
-    //delete Category
+    //delete Qurban
     public function delete($id)
     {
         //Proteksi delete
         is_login();
 
-        $category = $this->category_model->detail_category($id);
+        $qurban = $this->qurban_model->detail_qurban($id);
 
-        if ($category->category_image != "") {
-            unlink('./assets/img/category/' . $category->category_image);
-            // unlink('./assets/img/artikel/thumbs/' . $berita->berita_gambar);
+        if ($qurban->qurban_image != "") {
+            unlink('./assets/img/galery/' . $qurban->qurban_image);
         }
 
-        $data = ['id'   => $category->id];
+        $data = ['id'   => $qurban->id];
 
-        $this->category_model->delete($data);
+        $this->qurban_model->delete($data);
         $this->session->set_flashdata('message', 'Data telah di Hapus');
-        redirect(base_url('admin/category'), 'refresh');
+        redirect(base_url('admin/qurban'), 'refresh');
     }
 }
