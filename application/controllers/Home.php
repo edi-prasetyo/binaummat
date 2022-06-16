@@ -37,7 +37,7 @@ class Home extends CI_Controller
         'berita'                => $berita,
         'category'              => $category,
         'layanan'               => $layanan,
-        // 'galery_featured'       => $galery_featured,
+        'galery_featured'       => $galery_featured,
         'content'               => 'front/home/index_home'
       );
       $this->load->view('front/layout/wrapp', $data, FALSE);
