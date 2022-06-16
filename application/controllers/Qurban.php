@@ -138,7 +138,6 @@ class Qurban extends CI_Controller
         $this->email->set_newline("\r\n");
         $this->email->from("$email_order->smtp_user", 'Order');
         $this->email->to($this->input->post('user_email'));
-
         $this->email->subject('Order ' . $transaction->invoice_number . '');
         $this->email->message('');
 
@@ -148,7 +147,6 @@ class Qurban extends CI_Controller
     }
     public function payment($insert_id = NULL)
     {
-
         $bank                               = $this->bank_model->get_allbank();
         $last_transaction                   = $this->transaction_model->last_transaction($insert_id);
 
@@ -237,9 +235,9 @@ class Qurban extends CI_Controller
 
             $data  = array(
                 'id'                    => $last_transaction->id,
-                'bukti_transfer'           => $upload_data['uploads']['file_name'],
-                'payment_status'          => 'Process',
-                'updated_at'          => date('Y-m-d H:i:s')
+                'bukti_transfer'        => $upload_data['uploads']['file_name'],
+                'payment_status'        => 'Process',
+                'updated_at'            => date('Y-m-d H:i:s')
             );
             $this->transaction_model->update($data);
             $this->session->set_flashdata('sukses', 'Terima Kasih Atas konfirmasi anda pesanan anda akan segera kami proses');

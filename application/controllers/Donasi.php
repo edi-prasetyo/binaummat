@@ -138,7 +138,7 @@ class Donasi extends CI_Controller
                 'content'                     => 'front/donasi/detail_donasi'
             );
             $this->add_count($donasi_slug);
-            $this->load->view('front/layout/wrapp', $data, FALSE);
+            $this->load->view('front/donasi/detail_donasi', $data, FALSE);
         } else {
             // Mobile View
             $data                           = array(
@@ -152,12 +152,9 @@ class Donasi extends CI_Controller
                 'content'                     => 'mobile/donasi/detail'
             );
             $this->add_count($donasi_slug);
-            $this->load->view('mobile/layout/wrapp', $data, FALSE);
+            $this->load->view('front/donasi/detail_donasi', $data, FALSE);
         }
     }
-
-
-
 
     public function checkout($id = NULL)
     {
