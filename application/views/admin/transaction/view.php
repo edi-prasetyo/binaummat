@@ -100,6 +100,8 @@
                                         <?php echo $transaction->donatur_name; ?><br>
                                         <p class="mb-1">E-mail: <a href="#"><?php echo $transaction->donatur_email; ?></a></p>
                                         <p class="mb-1">Phone: <?php echo $transaction->donatur_phone; ?></p>
+
+                                        <p class="mb-1">Keterangan : <?php echo $transaction->doa_khusus; ?></p>
                                     </span>
 
 
