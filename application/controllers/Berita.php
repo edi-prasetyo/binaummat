@@ -106,7 +106,7 @@ class Berita extends CI_Controller
         'donasi_popular'               => $donasi_popular,
         'content'                     => 'front/berita/detail_berita'
       );
-      $this->add_count($berita_slug);
+      // $this->add_count($berita_slug);
       $this->load->view('front/layout/wrapp', $data, FALSE);
     } else {
       // Mobile View
@@ -119,31 +119,24 @@ class Berita extends CI_Controller
         'donasi_popular'               => $donasi_popular,
         'content'                     => 'mobile/berita/detail'
       );
-      $this->add_count($berita_slug);
+      // $this->add_count($berita_slug);
       $this->load->view('mobile/layout/wrapp', $data, FALSE);
     }
   }
-  function add_count($berita_slug)
-  {
-    // load cookie helper
-    $this->load->helper('cookie');
-    // this line will return the cookie which has slug name
-    $check_visitor = $this->input->cookie(urldecode($berita_slug), FALSE);
-    // this line will return the visitor ip address
-    $ip = $this->input->ip_address();
-    // if the visitor visit this article for first time then //
-    //set new cookie and update article_views column  ..
-    //you might be notice we used slug for cookie name and ip
-    //address for value to distinguish between articles  views
-    if ($check_visitor == false) {
-      $cookie = array(
-        "name"                      => urldecode($berita_slug),
-        "value"                     => "$ip",
-        "expire"                    =>  time() + 7200,
-        "secure"                    => false
-      );
-      $this->input->set_cookie($cookie);
-      $this->berita_model->update_counter(urldecode($berita_slug));
-    }
-  }
+  // function add_count($berita_slug)
+  // {
+  //   $this->load->helper('cookie');
+  //   $check_visitor = $this->input->cookie(urldecode($berita_slug), FALSE);
+  //   $ip = $this->input->ip_address();
+  //   if ($check_visitor == false) {
+  //     $cookie = array(
+  //       "name"                      => urldecode($berita_slug),
+  //       "value"                     => "$ip",
+  //       "expire"                    =>  time() + 7200,
+  //       "secure"                    => false
+  //     );
+  //     $this->input->set_cookie($cookie);
+  //     $this->berita_model->update_counter(urldecode($berita_slug));
+  //   }
+  // }
 }

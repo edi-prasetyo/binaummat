@@ -37,8 +37,12 @@
 
                                 <div class="col-6">
                                     <p class="card-text"><small>Terkumpul</small><br> <b>
-                                            Rp. <?php
-                                                echo number_format($nominal_donasi, 0, ",", ".");  ?></b> </p>
+                                            Rp. <?php if ($nominal_donasi == null) : ?>
+                                                0
+                                            <?php else : ?>
+                                                <?php echo number_format($nominal_donasi); ?>
+                                            <?php endif; ?>
+                                        </b> </p>
                                 </div>
                                 <div class="col-6 text-right">
                                     <small>Donatur</small><br>
