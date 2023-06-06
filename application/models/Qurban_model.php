@@ -77,8 +77,12 @@ class Qurban_model extends CI_Model
     }
     public function update($data)
     {
-        $this->db->where('id', $data['id']);
-        $this->db->update('qurban', $data);
+        // $this->db->where('id', $data['id']);
+        // $this->db->update('qurban', $data);
+        $this->db->where('book_id', $data['id']);
+        $this->db->set($data);
+        $this->db->update('qurban');
+        return TRUE;
     }
     //Delete Data
     public function delete($data)
