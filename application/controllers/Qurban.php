@@ -48,9 +48,9 @@ class Qurban extends CI_Controller
                     'bank'                        => $bank,
                     'qurban'                      => $qurban,
                     'galery_featured'             => $galery_featured,
-                    // 'content'                     => 'front/qurban/index'
+                    'content'                     => 'front/qurban/index'
                 ];
-                $this->load->view('front/qurban/index', $data, FALSE);
+                $this->load->view('front/layout/wrapp', $data, FALSE);
             } else {
 
                 $id =  $this->input->post('qurban_id');
